@@ -7,8 +7,10 @@ RUN wget http://archive.apache.org/dist/lucene/solr/5.5.2/solr-5.5.2.tgz
 RUN mv solr-5.5.2.tgz  /opt
 WORKDIR /opt
 RUN tar -zxvf solr-5.5.2.tgz
+RUN mv solr-5.5.2 solr
 RUN ls /opt
-WORKDIR /opt/solr-5.5.2
-ENV SOLR_PORT 8983
+WORKDIR /opt/solr
+ENV SOLR_USER solr
+ENV SOLR_UID 8983
 RUN ./bin/solr -p 8983
 RUN ./bin/solr create -c zuijin
