@@ -9,5 +9,6 @@ WORKDIR /opt
 RUN tar -zxvf solr-5.5.2.tgz
 RUN ls /opt
 WORKDIR /opt/solr-5.5.2
+ENV SOLR_PORT 8983
 RUN ./bin/solr -p 8983
 RUN ./bin/solr create -c zuijin
