@@ -12,8 +12,22 @@ RUN ls /opt
 WORKDIR /opt/solr
 ENV SOLR_USER solr
 ENV SOLR_UID 8983
-RUN mkdir -p /opt/solr/server/solr/lib /opt/solr/server/solr/mycores 
+RUN mkdir -p /opt/solr/server/solr/lib /opt/solr/server/solr/mycores
 RUN sed -i -e 's/#SOLR_PORT=8983/SOLR_PORT=8983/' /opt/solr/bin/solr.in.sh && \
   sed -i -e '/-Dsolr.clustering.enabled=true/ a SOLR_OPTS="$SOLR_OPTS -Dsun.net.inetaddr.ttl=60 -Dsun.net.inetaddr.negative.ttl=60"' /opt/solr/bin/solr.in.sh
 RUN ./bin/solr -p 8983
 RUN ./bin/solr create -c zuijin
+RUN  chown -R $SOLR_USER:$SOLR_USER /opt/solr && \
+  mkdir /docker-entrypoint-initdb.d /opt/docker-solr/
+
+COPY scripts /opt/docker-solr/scripts
+RUN chown -R $SOLR_USER:$SOLR_USER /opt/docker-solr
+
+ENV PATH /opt/solr/bin:/opt/docker-solr/scripts:$PATH
+
+EXPOSE 8983
+WORKDIR /opt/solr
+USER $SOLR_USER
+
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["solr"]
