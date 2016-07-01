@@ -77,11 +77,80 @@ elif [[ "$1" = 'solr-create' ]]; then
           exit 1
         fi
         ls -l /opt/solr/server/solr/zuijin/conf
-        echo   <requestHandler name="/admin/luke" class="org.apache.solr.handler.admin.LukeRequestHandler" />
         sed -i .bak  '836i\
         <requestHandler name="/admin/luke" class="org.apache.solr.handler.admin.LukeRequestHandler" />\
         '  /opt/solr/server/solr/zuijin/conf/solrconfig.xml
         head -n 848 solrconfig.xml | tail -30
+        echo "curl add-field-type"
+        curl -X POST -H 'Content-type:application/json' --data-binary '{
+  "add-field-type":{
+     "name":"text_cn",
+     "class":"solr.TextField",
+      "analyzer":{
+        "type":"index",
+        "tokenizer":{
+          "class":"com.hankcs.lucene.HanLPTokenizerFactory",
+          "enableIndexMode":"true"
+        }
+       },
+      "analyzer":{
+        "type":"query",
+        "tokenizer":{
+          "class":"com.hankcs.lucene.HanLPTokenizerFactory",
+          "enableIndexMode":"false"
+        }
+      }
+    }
+}' http://localhost:8983/solr/zuijin/schema
+
+        echo "add field ns"
+curl -X POST -H 'Content-type:application/json' --data-binary '{
+  "add-field":{
+     "name":"_ts",
+     "type":"long",
+     "stored":true,
+     "indexed":true
+      }
+}' http://localhost:8983/solr/zuijin/schema
+
+        echo "add field ns"
+curl -X POST -H 'Content-type:application/json' --data-binary '{
+  "add-field":{
+     "name":"ns",
+     "type":"string",
+     "stored":true,
+     "indexed":true
+      }
+}' http://localhost:8983/solr/zuijin/schema
+echo "add name "
+curl -X POST -H 'Content-type:application/json' --data-binary '{
+  "add-field":{
+     "name":"name",
+     "type":"text_cn",
+     "stored":true,
+     "indexed":true
+      }
+}' http://localhost:8983/solr/zuijin/schema
+
+echo "add content "
+curl -X POST -H 'Content-type:application/json' --data-binary '{
+  "add-field":{
+     "name":"content",
+     "type":"text_cn",
+     "stored":true,
+     "indexed":true
+      }
+}' http://localhost:8983/solr/zuijin/schema
+
+
+echo "replace title "
+curl -X POST -H 'Content-type:application/json' --data-binary '{
+  "replace-field":{
+      "name":"title",
+     "type":"text_cn",
+     "stored":true,
+     "indexed":true }
+}' http://localhost:8983/solr/zuijin/schema
         echo "Created core with: ${@:2}"
         initial_solr_end
         touch $sentinel
