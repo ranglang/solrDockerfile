@@ -36,4 +36,4 @@ WORKDIR /opt/solr
 USER $SOLR_USER
 
 #ENTRYPOINT ["/opt/docker-solr/scripts/docker-entrypoint.sh"]
-CMD "/opt/docker-solr/scripts/docker-entrypoint.sh" "solr", "solr-create" "-c" "zuijin"
+CMD "/opt/docker-solr/scripts/docker-entrypoint.sh solr solr-create -c zuijin"
