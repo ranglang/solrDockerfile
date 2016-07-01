@@ -76,10 +76,13 @@ elif [[ "$1" = 'solr-create' ]]; then
           echo "Could not find any cores"
           exit 1
         fi
+        echo "ls file"
         ls -l /opt/solr/server/solr/zuijin/conf
+        echo "sed file"
         sed -i ".bak"  '836i\
         <requestHandler name="/admin/luke" class="org.apache.solr.handler.admin.LukeRequestHandler" />\
         '  /opt/solr/server/solr/zuijin/conf/solrconfig.xml
+        echo "sed result"
         head -n 848 solrconfig.xml | tail -30
         echo "curl add-field-type"
         curl -X POST -H 'Content-type:application/json' --data-binary '{
