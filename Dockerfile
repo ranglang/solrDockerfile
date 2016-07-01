@@ -34,6 +34,6 @@ ENV PATH /opt/solr/bin:/opt/docker-solr/scripts:$PATH
 EXPOSE 8983
 WORKDIR /opt/solr
 USER $SOLR_USER
-
+#/opt/docker-solr/scripts/docker-entrypoint.sh
 #ENTRYPOINT ["/opt/docker-solr/scripts/docker-entrypoint.sh"]
-CMD "/opt/docker-solr/scripts/docker-entrypoint.sh solr solr-create -c zuijin"
+CMD "solr solr-create -c zuijin"
