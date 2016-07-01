@@ -79,7 +79,7 @@ elif [[ "$1" = 'solr-create' ]]; then
         echo "ls file"
         ls -l /opt/solr/server/solr/zuijin/conf
         echo "sed file"
-        sed -i bak  '836i\
+        sed -i -e '836i\
         <requestHandler name="/admin/luke" class="org.apache.solr.handler.admin.LukeRequestHandler" />\
         '  /opt/solr/server/solr/zuijin/conf/solrconfig.xml
         echo "sed result"

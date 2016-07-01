@@ -836,7 +836,6 @@
 <requestHandler name="/admin/luke" class="org.apache.solr.handler.admin.LukeRequestHandler" />
 <requestHandler name="/admin/luke" class="org.apache.solr.handler.admin.LukeRequestHandler" />
 <requestHandler name="/admin/luke" class="org.apache.solr.handler.admin.LukeRequestHandler" />
-<requestHandler name="/admin/luke" class="org.apache.solr.handler.admin.LukeRequestHandler" />
   <requestHandler name="/admin/luke" class="org.apache.solr.handler.admin.LukeRequestHandler" />
   <!-- A request handler that returns indented JSON by default -->
 <requestHandler name="/admin/luke" class="org.apache.solr.handler.admin.LukeRequestHandler" />
