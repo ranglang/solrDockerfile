@@ -29,7 +29,6 @@ RUN wget https://repo1.maven.org/maven2/com/hankcs/hanlp/portable-1.2.10/hanlp-p
 RUN mv hanlp-portable-1.2.10.jar /opt/solr/server/solr-webapp/webapp/WEB-INF/lib
 RUN wget https://github.com/hankcs/hanlp-solr-plugin/releases/download/v1.1.1/hanlp-solr-plugin-1.1.1.zip && \
   ls -l &&  unzip hanlp-solr-plugin-1.1.1.zip  && mv hanlp-solr-plugin-1.1.1.jar  /opt/solr/server/solr-webapp/webapp/WEB-INF/lib
-
 ENV PATH /opt/solr/bin:/opt/docker-solr/scripts:$PATH
 
 EXPOSE 8983
@@ -37,4 +36,4 @@ WORKDIR /opt/solr
 USER $SOLR_USER
 
 ENTRYPOINT ["/opt/docker-solr/scripts/docker-entrypoint.sh"]
-CMD ["solr solr-create -c zuijin"]
+CMD ["solr", "solr-create" "-c" "zuijin"]

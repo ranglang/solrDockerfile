@@ -76,7 +76,8 @@ elif [[ "$1" = 'solr-create' ]]; then
           echo "Could not find any cores"
           exit 1
         fi
-
+        ls -l /opt/solr/server/solr/zuijin/conf
+        ls -l /opt/solr/server/solr/mycores/zuijin/conf
         echo "Created core with: ${@:2}"
         initial_solr_end
         touch $sentinel
