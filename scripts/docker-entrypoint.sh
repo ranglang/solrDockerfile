@@ -77,7 +77,11 @@ elif [[ "$1" = 'solr-create' ]]; then
           exit 1
         fi
         ls -l /opt/solr/server/solr/zuijin/conf
-        ls -l /opt/solr/server/solr/mycores/zuijin/conf
+        echo   <requestHandler name="/admin/luke" class="org.apache.solr.handler.admin.LukeRequestHandler" />
+        sed -i .bak  '836i\
+        <requestHandler name="/admin/luke" class="org.apache.solr.handler.admin.LukeRequestHandler" />\
+        '  /opt/solr/server/solr/zuijin/conf/solrconfig.xml
+        head -n 848 solrconfig.xml | tail -30
         echo "Created core with: ${@:2}"
         initial_solr_end
         touch $sentinel
