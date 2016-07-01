@@ -77,9 +77,9 @@ elif [[ "$1" = 'solr-create' ]]; then
           exit 1
         fi
         ls -l /opt/solr/server/solr/zuijin/conf
-        sed -i .bak  '836i\
-        <requestHandler name="/admin/luke" class="org.apache.solr.handler.admin.LukeRequestHandler" />\
-        '  /opt/solr/server/solr/zuijin/conf/solrconfig.xml
+        sed -i .bak  "836i\
+        <requestHandler name=\"/admin/luke\" class=\"org.apache.solr.handler.admin.LukeRequestHandler\" />\
+        "  /opt/solr/server/solr/zuijin/conf/solrconfig.xml
         head -n 848 solrconfig.xml | tail -30
         echo "curl add-field-type"
         curl -X POST -H 'Content-type:application/json' --data-binary '{
