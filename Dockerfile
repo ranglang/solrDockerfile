@@ -26,9 +26,9 @@ COPY scripts /opt/docker-solr/scripts
 RUN chmod -R 777 /opt/docker-solr/scripts
 RUN chown -R $SOLR_USER:$SOLR_USER /opt/docker-solr
 RUN wget https://repo1.maven.org/maven2/com/hankcs/hanlp/portable-1.2.10/hanlp-portable-1.2.10.jar
-RUN mv hanlp-portable-1.2.10.jar /opt/solr/server/lib
+RUN mv hanlp-portable-1.2.10.jar /opt/solr/server/solr-webapp/webapp/WEB-INF/lib
 RUN wget https://github.com/hankcs/hanlp-solr-plugin/releases/download/v1.1.1/hanlp-solr-plugin-1.1.1.zip && \
-  ls -l &&  unzip hanlp-solr-plugin-1.1.1.zip  && mv hanlp-solr-plugin-1.1.1.jar  /opt/solr/server/lib
+  ls -l &&  unzip hanlp-solr-plugin-1.1.1.zip  && mv hanlp-solr-plugin-1.1.1.jar  /opt/solr/server/solr-webapp/webapp/WEB-INF/lib
 
 ENV PATH /opt/solr/bin:/opt/docker-solr/scripts:$PATH
 
