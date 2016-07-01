@@ -81,10 +81,10 @@ elif [[ "$1" = 'solr-create' ]]; then
         echo "sed file"
         sed -i '836i\
         <requestHandler name="/admin/luke" class="org.apache.solr.handler.admin.LukeRequestHandler" />\
-        '  /opt/solr/server/solr/zuijin/conf/solrconfig.xml   
+        '  /opt/solr/server/solr/zuijin/conf/solrconfig.xml
         ls -l /opt/solr/server/solr/zuijin/conf
         echo "sed result"
-        head -n 848 solrconfig.xml | tail -30
+        head -n 848 /opt/solr/server/solr/zuijin/conf/solrconfig.xml | tail -30
         echo "curl add-field-type"
         curl -X POST -H 'Content-type:application/json' --data-binary '{
   "add-field-type":{
